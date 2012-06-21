@@ -1,6 +1,6 @@
 <?php
 
-namespace HttpClient;
+namespace http;
 
 require_once 'Exception.php';
 
@@ -48,7 +48,7 @@ class Uri {
 	/**
 	 * @param string $scheme
 	 * @return Uri
-	 * @throws Exception
+	 * @throws \http\Exception
 	 */
 	public function setScheme($scheme) {
 		switch ($scheme) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace HttpClient;
+namespace http;
 
 class Response {
 	protected $statusCode	= 200;
