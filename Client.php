@@ -163,8 +163,9 @@ class Client {
 		$headers = '';
 
 		$this->setHeader('Host', $this->getUrl()->getHost());
-		if (($username = $this->getAuth('username')) && ($password = $this->getAuth('password'))) {
-			$this->setHeader('Authorization', "Basic " . base64_encode(urlencode($username) . ':' . urlencode($password)));
+		if ($username = $this->getAuth('username')) {
+			$this->setHeader('Authorization', "Basic " . base64_encode($username . ':' . $this->getAuth('password', '')));
+//			$this->setHeader('Authorization', "Basic " . base64_encode(urlencode($username) . ':' . urlencode($this->getAuth('password', ''))));
 		}
 		$this->setHeader('Content-Type', $this->getConfig('method') == self::REQUEST_METHOD_POST? self::ENC_URLENCODED: self::ENC_FORMDATA);
 
@@ -180,7 +181,7 @@ class Client {
 	 * @param string|null $value
 	 * @return \http\Client
 	 */
-	protected function setHeader($name, $value) {
+	public function setHeader($name, $value) {
 		if ($value === null && array_key_exists($name, $this->headers)) {
 			unset($this->headers[$name]);
 		} else {
